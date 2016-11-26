@@ -32,7 +32,7 @@
     return 0;
 }*/
 
-int main (int argc, char **argv)
+/*int main (int argc, char **argv)
 {
     char y, x;
     unsigned res;
@@ -80,5 +80,116 @@ int main (int argc, char **argv)
 
     plotGraph ("x", 1);
     fclose (f);
+    return 0;
+}*/
+
+void removeChar (char *str, char toRemove)
+{
+    for (unsigned i = 0; i < strlen (str); i ++)
+    {
+        if (str [i] == toRemove)
+        {
+            for (unsigned j = i; i < strlen (str); j ++)
+            {
+                str [j] = str [j + 1];
+            }
+        }
+    }
+}
+
+int main (int argc, char **argv)
+{
+   // initGraphTitle ("Speed graph.");
+    char *vehicle1 = malloc (sizeof (char) * 64);
+    char *vehicle2 = malloc (sizeof (char) * 64);
+
+    puts ("Enter first vehicle: ");
+    fgets (vehicle1, sizeof (vehicle1), stdin);
+    strtok (vehicle1, "\n");
+   // puts (vehicle1);
+//int c;
+//while ( (c = getchar()) != EOF && c != '\n') { }
+    puts ("Enter second vehicle: ");
+    fgets (vehicle2, sizeof (vehicle2), stdin);
+    strtok (vehicle2, "\n");
+   // puts (vehicle2);
+
+    initPlotLine (1, "red");
+    initPlotLine (2, "blue");
+    initLinePointSpace (5);
+
+    /*removeChar (vehicle1, '?');
+    removeChar (vehicle2, '?');*/
+
+    FILE *vehicle1File = fopen (vehicle1, "w");
+    FILE *vehicle2File = fopen (vehicle2, "w");
+
+    int dist1 [3];
+    int time1 [3];
+    int time2 [3];
+    int dist2 [3];
+    unsigned i;
+    char *temp = malloc (sizeof (char) * 128);
+
+    puts ("Enter distances for first vehicle: ");
+    for (i = 0; i < 3; i ++)
+    {
+        fgets (temp, sizeof (temp), stdin);
+        dist1 [i] = (int) strtol (temp, NULL, 10);
+    }
+
+    puts ("Enter times for first vehicle: ");
+    for (i = 0; i < 3; i ++)
+    {
+        fgets (temp, sizeof (temp), stdin);
+        time1 [i] = (int) strtol (temp, NULL, 10);
+    }
+
+    puts ("Enter distances for second vehicle: ");
+    for (unsigned i = 0; i < 3; i ++)
+    {
+        fgets (temp, sizeof (temp), stdin);
+        dist2 [i] = (int) strtol (temp, NULL, 10);
+    }
+
+    puts ("Enter times for second vehicle: ");
+    for (i = 0; i < 3; i ++)
+    {
+        fgets (temp, sizeof (temp), stdin);
+        time2 [i] = (int) strtol (temp, NULL, 10);
+    }
+
+    free (temp);
+
+    int speed1 [3];
+    int speed2 [3];
+
+    //Calculating the speeds for the vehicles
+    for (i = 0; i < 3; i ++)
+    {
+        speed1 [i] = dist1 [i] / time1 [i];
+        speed2 [i] = dist2 [i] / time2 [i];
+    }
+
+    //Now writing the coordinates of the graph we want to a file
+    for (i = 0; i < 3; i ++)
+    {
+        writeCoord(vehicle1File, dist1 [i], time1 [i]);
+        writeCoord(vehicle2File, dist2 [i], time2 [i]);
+    }
+
+    fclose (vehicle2File);
+    fclose (vehicle1File);
+
+    /*removeChar (vehicle1, '?');
+    removeChar (vehicle2, '?');*/
+
+    //strcat (vehicle1, "?");
+    //strcat (vehicle2, "?");
+    plotGraph(vehicle1, 1);
+    plotGraph(vehicle2, 2);
+    free (vehicle1);
+    free (vehicle2);
+
     return 0;
 }
