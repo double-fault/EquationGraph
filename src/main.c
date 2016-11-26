@@ -107,8 +107,8 @@ int main (int argc, char **argv)
     fgets (vehicle1, sizeof (vehicle1), stdin);
     strtok (vehicle1, "\n");
    // puts (vehicle1);
-//int c;
-//while ( (c = getchar()) != EOF && c != '\n') { }
+int c;
+while ( (c = getchar()) != EOF && c != '\n') { }
     puts ("Enter second vehicle: ");
     fgets (vehicle2, sizeof (vehicle2), stdin);
     strtok (vehicle2, "\n");
