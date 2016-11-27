@@ -115,14 +115,13 @@ while ( (c = getchar()) != EOF && c != '\n') { }
    // puts (vehicle2);
 
     initPlotLine (1, "red");
-    initPlotLine (2, "blue");
+    initPlotLine (2, "#0060ad");
     initLinePointSpace (5);
 
     /*removeChar (vehicle1, '?');
     removeChar (vehicle2, '?');*/
 
-    FILE *vehicle1File = fopen (vehicle1, "w");
-    FILE *vehicle2File = fopen (vehicle2, "w");
+    FILE *vehicleFile = fopen (vehicle1, "w");
 
     int dist1 [3];
     int time1 [3];
@@ -174,20 +173,30 @@ while ( (c = getchar()) != EOF && c != '\n') { }
     //Now writing the coordinates of the graph we want to a file
     for (i = 0; i < 3; i ++)
     {
-        writeCoord(vehicle1File, dist1 [i], time1 [i]);
-        writeCoord(vehicle2File, dist2 [i], time2 [i]);
+        writeCoord(vehicleFile, dist1 [i], time1 [i]);
+    }
+    fprintf (vehicleFile, "\n\n");
+    for (i = 0; i < 3; i ++)
+    {
+        writeCoord(vehicleFile, dist2 [i], time2 [i]);
     }
 
-    fclose (vehicle2File);
-    fclose (vehicle1File);
+    fclose (vehicleFile);
 
     /*removeChar (vehicle1, '?');
     removeChar (vehicle2, '?');*/
 
     //strcat (vehicle1, "?");
     //strcat (vehicle2, "?");
-    plotGraph(vehicle1, 1);
-    plotGraph(vehicle2, 2);
+    //plotGraph(vehicle1, 1);
+    //plotGraph(vehicle2, 2);
+
+    char *command;
+    asprintf (&command, "plot '%s' index 0 with linespoints ls 1, \
+                              ''   index 1 with linespoints ls 2", vehicle1);
+    executePlotCommand(command);
+    free (command);
+
     free (vehicle1);
     free (vehicle2);
 

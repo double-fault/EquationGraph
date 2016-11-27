@@ -29,7 +29,7 @@ void executePlotCommand (char *command)
 void initPlotLine (unsigned serialNum, char *colour)
 {
     char *command;
-    asprintf (&command, "set style line %u lc rgb '%s' lt 1 lw 2 pt 7 pi -1 ps 4.0", serialNum, colour);
+    asprintf (&command, "set style line %u lc rgb '%s' lt 1 lw 2 pt 5 pi -1 ps 4.0", serialNum, colour);
     executePlotCommand (command);
     free (command);
     return;
