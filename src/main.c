@@ -129,6 +129,7 @@ while ( (c = getchar()) != EOF && c != '\n') { }
     int dist2 [3];
     unsigned i;
     char *temp = malloc (sizeof (char) * 128);
+while ( (c = getchar()) != EOF && c != '\n') { }
 
     puts ("Enter distances for first vehicle: ");
     for (i = 0; i < 3; i ++)
