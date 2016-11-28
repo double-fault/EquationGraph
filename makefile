@@ -1,2 +1,2 @@
 all:
-	clang src/*.c
+	gcc src/*.c -std=c99
