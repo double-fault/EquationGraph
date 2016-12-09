@@ -44,7 +44,7 @@ int main (int argc, char **argv)
     strtok (vehicle2, "\n");
 
     initPlotLine (1, "red");
-    initPlotLine (2, "#0060ad"); 
+    initPlotLine (2, "#0060ad");
     initLinePointSpace (5);
 
     FILE *vehicleFile = fopen (vehicle1, "w");
